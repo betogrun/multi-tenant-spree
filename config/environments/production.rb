@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.cache_store = :memory_store, { namespace: -> { Apartment::Tenant.current } }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
