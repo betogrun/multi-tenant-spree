@@ -41,6 +41,7 @@ gem 'spree_gateway', '~> 3.3'
 
 gem 'shopping_mall', github: 'betogrun/shopping_mall', branch: 'master'
 
+gem "pry-meta"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
