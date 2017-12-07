@@ -5,14 +5,17 @@ class StoreCreationJob < ApplicationJob
 
   def perform(**args)
     # Do something later
-    name = args.fetch(:name)
+    store = args.fetch(:store)
+    #name = args.fetch(:name)
+    name = store.subdomain
     admin_email = args.fetch(:admin_email)
     password = args.fetch(:password)
 
     puts "Creating store #{name}"
-    create_store(name, admin_email, password)
+    spree_tenant = create_store(name, admin_email, password)
 
-    
+    store.tenant = spree_tenant
+    store.save
 
     
 end
@@ -22,7 +25,7 @@ private
 def create_store(name, admin_email, password)
 
   tenant = name.gsub('-', '_') 
-  Spree::Tenant.create name: tenant
+  spree_tenant = Spree::Tenant.create name: tenant
   Apartment::Tenant.create tenant
 
   puts 'Store created successfully'
@@ -44,7 +47,7 @@ def create_store(name, admin_email, password)
     puts "Creating admin user #{admin_email}"
     create_admin_user(name, admin_email, password)
   end
-
+  spree_tenant
 end
 
 def create_admin_user(tenant, email, password)
