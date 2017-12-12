@@ -4,11 +4,13 @@
   <strong>Subdomain:</strong>
   <%= @store.subdomain %>
 </p>
-
 <p>
-  <strong>Seller:</strong>
-  <%= @store.seller %>
+  <%= link_to "Store website", "http://#{@store.subdomain}.lvh.me:3000", :target => "_blank" %>
 </p>
+
+
+
+
 
 <%= link_to 'Edit', edit_store_path(@store) %> |
 <%= link_to 'Back', stores_path %>

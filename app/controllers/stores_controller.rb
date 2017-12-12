@@ -5,7 +5,7 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all
+    @stores = current_seller.stores
   end
 
   # GET /stores/1
@@ -25,10 +25,12 @@ class StoresController < ApplicationController
   # POST /stores
   # POST /stores.json
   def create
+    #binding.pry
     @store = Store.new(store_params)
-
+    store_handler = StoreHandler.new(@store, params[:admin_login], params[:admin_password])
     respond_to do |format|
-      if @store.save
+      #if @store.save
+      if store_handler.create
         format.html { redirect_to @store, notice: 'Store was successfully created.' }
         format.json { render :show, status: :created, location: @store }
       else
@@ -70,6 +72,6 @@ class StoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
-      params.require(:store).permit(:subdomain, :seller_id)
+      params.require(:store).permit(:subdomain).merge(seller: current_seller)
     end
 end

@@ -16,10 +16,18 @@
     <%= form.text_field :subdomain, id: :store_subdomain %>
   </div>
 
+
   <div class="field">
-    <%= form.label :seller_id %>
-    <%= form.text_field :seller_id, id: :store_seller_id %>
+    <%= form.label 'Admin login' %>
+    <%= text_field_tag :admin_login %>
   </div>
+
+  <div class="field">
+    <%= form.label 'Admin password' %>
+    <%= text_field_tag :admin_password %>
+  </div>
+
+  
 
   <div class="actions">
     <%= form.submit %>
