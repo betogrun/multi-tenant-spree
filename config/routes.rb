@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   constraints GlobalContraint do
     devise_for :sellers
     resources :stores
+    get '/checksubdomain', to: 'stores#check_subdomain'
     root to: redirect('/stores')
   end
 
