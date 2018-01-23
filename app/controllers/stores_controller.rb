@@ -64,6 +64,14 @@ class StoresController < ApplicationController
     end
   end
 
+  # GET /checksubdomain?subdomain=subdomain_name
+  def check_subdomain
+    response = Store.exists?(subdomain: params[:subdomain_name])
+    respond_to do |format|
+      format.json { render json: response, status: :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_store
