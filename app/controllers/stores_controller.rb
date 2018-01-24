@@ -66,9 +66,10 @@ class StoresController < ApplicationController
 
   # GET /checksubdomain?subdomain=subdomain_name
   def check_subdomain
-    response = Store.exists?(subdomain: params[:subdomain_name])
+    #binding.pry
+    response = Store.exists?(subdomain: params[:store][:subdomain])
     respond_to do |format|
-      format.json { render json: response, status: :ok }
+      format.json { render json: !response, status: :ok }
     end
   end
 
