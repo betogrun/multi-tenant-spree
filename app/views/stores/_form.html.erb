@@ -1,4 +1,4 @@
-<%= form_with(model: store, local: true) do |form| %>
+<%= form_with(model: store, local: true, id: 'new_store') do |form| %>
   <% if store.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
@@ -28,6 +28,11 @@
   <div class="field">
     <%= form.label 'Admin password' %>
     <%= password_field_tag :admin_password %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Confirm admin password' %>
+    <%= password_field_tag :confirm_admin_password %>
   </div>
 
   
