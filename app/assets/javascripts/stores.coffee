@@ -2,10 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
+$(document).on 'turbolinks:load', ->
     $("#new_store").validate(
         {
-            debug: true,
+            #debug: true,
             rules: {
                 "store[subdomain]": { required: true, minlength: 6, remote: "/checksubdomain" },
                 "admin_login": { required: true, email: true},

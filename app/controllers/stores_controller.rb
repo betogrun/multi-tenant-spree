@@ -27,10 +27,16 @@ class StoresController < ApplicationController
   def create
     #binding.pry
     @store = Store.new(store_params)
-    store_handler = StoreHandler.new(@store, params[:admin_login], params[:admin_password])
+    #store_handler = StoreHandler.new(@store, params[:admin_login], params[:admin_password])
     respond_to do |format|
-      #if @store.save
-      if store_handler.create
+      if @store.save #deixar tenant opcional
+      #if store_handler.create
+        SpreeStoreCreationJob.perform_later(
+          {
+            store: @store,
+            admin_login: params[:admin_login],
+            admin_password: params[:admin_password]
+          })
         format.html { redirect_to @store, notice: 'Store was successfully created.' }
         format.json { render :show, status: :created, location: @store }
       else
